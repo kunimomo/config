@@ -33,16 +33,22 @@ local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_lower_right_triangle
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_upper_left_triangle
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+
+   -- デフォルトの背景色、文字色、区切り部分の背景色を設定
    local background = "#49575C"
    local foreground = "#FFFFFF"
    local edge_background = "none"
-
+   
+   -- タブがアクティブな場合の色を上書き
    if tab.is_active then
      background = "#FFE1E1"
      foreground = "#000000"
    end
+
+   -- 区切り部分の文字色を背景色に合わせる
    local edge_foreground = background
 
+   -- タイトルテキストを生成（左右に余白を追加）
    local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
 
    return {
@@ -62,7 +68,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 config.font = wezterm.font("JetBrains Mono", {weight="Regular", stretch="Normal", style="Normal"})
 
 -- フォントサイズの設定
-config.font_size = 14
+config.font_size = 12
 
 -- 日本語入力
 config.use_ime = true
